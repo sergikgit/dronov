@@ -1,30 +1,11 @@
-<!doctype html>
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link type="text/css" href="main.css" rel="stylesheet">
-	<title>Здесь будет заголовок => {{ good.name }} :: {{ good.category.name }} :: Все для y6opки</title>
-</head>
-<body>
-	<div id="header">
-		<h1>Bce для уборки</h1>
-	</div>
-	<div id="leftmenu">
-		<ul>
-		{% for cat in cats %}
-			<li><a href="/goods/{{ cat.id }}/">{{ cat.name }}</a></li>
-		{% endfor %}
-		</ul>
-	</div>
-	<div id="main">
+{% extends "base.html "%}
+{% block title %}  {{ good.name }} :: {{ good.category.name }} {% endblock %}
+
+{% block main%}
 		<h2>{{ good.name }}</h2>
 		<p class="category">Kaтeгopия: {{ good.category.name }}</p>
 		<p>{{ good.description|linebreaksbr }}</p>
 		<p>{% if not good.in_stock %}Нет в наличии!{% endif %}</p>
-		<p class="not-in-stock"><a href="/goods/{{ good.category.id }}/"> Назад</а></р>
-	</div>
-	<div id="footer">
-		<p>Bce права принадлежат разработчикам сайта.</р>
-	</div>
-</body>
-</html>
+		<p class="not-in-stock"> {% if not good.in_stock %}Нет в наличии{% endif %}        
+        <a href="/goods/{{ good.category.id }}/"> Назад</а></р>                    
+{% endblock %}

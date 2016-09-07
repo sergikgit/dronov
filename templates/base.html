@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link type="text/css" href="main.css" rel="stylesheet">
+	<title> {% block title%}   {% endblock %} :: Все для yбopки</title>
+</head>
+<body>
+	<div id="header">
+		<h1>Bce для y6opки</h1>
+	</div>
+	<div id="leftmenu">
+		<ul>
+			{% for cat in cats %}
+				<li><a href="{% url "index" cat_id=cat.id as cat_url %}">{{ cat.name }}</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div id="main">
+     {% block main %}
+     {% endblock %}
+	</div> 
+<div id="footer">
+	<p>Bce права принадлежат разработчикам сайта.</p>
+</div>
+</body>
+</html>
