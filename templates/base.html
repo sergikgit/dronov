@@ -1,8 +1,9 @@
-<!doctype html>
+{% load staticfiles %}
+<!doctype html>       
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link type="text/css" href="main.css" rel="stylesheet">
+	<link type="text/css" href={% static "main.css" %} rel="stylesheet">
 	<title> {% block title%}   {% endblock %} :: Все для yбopки</title>
 </head>
 <body>

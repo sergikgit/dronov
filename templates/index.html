@@ -4,21 +4,35 @@
 {% block main %}
 		<h2>{{ category.name }}</h2>
 		<table>
-			<tr>
-				<th>Haзвaние</th>
-				<th>EcTb в наличии</th>
-			</tr>
-			{% for good in goods %}
-				<tr>
-					<td><a href="/goods/good/{{ good.id }}/">{{ good.name }}</a></td>
-					<td class="centered">{% if good.in_stock %}+{% endif %}</td>
-				</tr>
-			{% endfor %}
-		</table>
-{% endblock %}
+            {% if goods.paginator.num_pages > 1 %}
+              много страниц Урааа! Всего их =  {{ goods.paginator.num_pages }} <br>
+              но мы находимся на странице =  {{ goods.number }} <br>
+              <div id="pagination">
+                {% if goods.has_previous %}
+                    есть превиоус!!! <br>
+                    проверяем переменную  goods.previous_page_number  {{ goods.previous_page_number }} <br>
+                    <div id="previous-page"><a href="{% url "index" cat_id=category.pk %}?page={{ goods.previous_page_number }}">&lt;&lt;</a></div>
+                {% endif %}
+                {% if goods.has_next %}
+                    <div id="next-page"><a href= "{% url "index" cat_id=category.pk %}?page={{ goods.next_page_number }}">&gt;</a></div>
+                {% endif %}
 
-<div id="footer">
-	<p>Bce права принадлежат разработчикам сайта.</p>
-</div>
-</body>
-</html>
+                <div id="num-pages">
+                {% for pn in goods.paginator.page_range %}
+                    {% if not forloop.first %}
+                        &nbsp; &nbsp;|&nbsp; &nbsp;
+                    {% endif %}
+                    {% if goods.numЬer != pn %}
+                        <a href="{% url "index" cat_id=category.pk %}?page={{ pn }}">
+                    {% endif %}
+                    {{ pn }}
+                    {% if goods.numЬer != pn %}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+           	</table>
+{% endblock %}
+            

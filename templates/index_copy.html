@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %} {{ category.name }} {% endblock %}
+
+{% block main %}
+		<h2>{{ category.name }}</h2>
+		<table>
+			<tr>
+				<th>Haзвaние</th>
+				<th>EcTb в наличии</th>
+			</tr>
+			{% for good in goods %}
+				<tr>
+					<td><a href="/goods/good/{{ good.id }}/">{{ good.name }}</a></td>
+					<td class="centered">{% if good.in_stock %}+{% endif %}</td>
+				</tr>
+			{% endfor %}
+		</table>
+{% endblock %}
+
+<div id="footer">
+	<p>Bce права принадлежат разработчикам сайта.</p>
+</div>
+</body>
+</html>
